@@ -1,0 +1,32 @@
+public class Solution {
+    bool inStr(char c,string s){
+        foreach(char letter in s){
+            if(letter==c){return true;}
+        }
+    return false;}
+    string truncByCharLeft(char c,string s){
+        int start=0;
+        for(int i=0;i<s.Length;i++){if(s[i]==c){start=i+1;break;}}
+        string result="";
+        for(int i=start;i<s.Length;i++){result+=s[i];}
+    return result;}
+    public int LengthOfLongestSubstring(string s) {
+        int maxLen=0;
+        int potentialLen=0;
+        string potentialStr="";
+        for(int i=0;i<s.Length;i++){
+            char c=s[i];
+            if(inStr(c,potentialStr)){if(potentialLen>maxLen){maxLen=potentialLen;}
+            potentialStr=truncByCharLeft(c,potentialStr);
+            potentialLen=potentialStr.Length;
+            potentialStr+=c;potentialLen++;
+            }
+            else{
+                potentialStr+=c;
+                potentialLen++;
+            }
+            if(potentialLen>maxLen){maxLen=potentialLen;}
+        }
+        
+    return maxLen;}
+}
